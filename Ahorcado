@@ -1,0 +1,182 @@
+#include "conio.h"
+#include "stdio.h"
+#include "iostream"
+#include "string.h"
+#include "stdlib.h" // para usar system();
+#include "time.h"
+
+using namespace std;
+
+inline void limpiar()
+{
+	cin.get();
+}
+
+void arbol(int valor)
+{
+	switch(valor)
+	{
+		case 0:
+			puts(" __________");
+			puts("|          |");
+			puts("|          ");
+			puts("|          ");
+			puts("|         ");
+			puts("|          ");
+			puts("|          ");
+			puts("|         ");
+			puts("|          ");
+			puts("|________");
+		break;
+		case 1:
+			puts(" __________");
+			puts("|          |");
+			puts("|          O");
+			puts("|         ");
+			puts("|         ");
+			puts("|         ");
+			puts("|         ");
+			puts("|         ");
+			puts("|          ");
+			puts("|________");
+		break;
+		case 2:
+			puts(" __________");
+			puts("|          |");
+			puts("|          O");
+			puts("|          |");
+			puts("|          |");
+			puts("|          |");
+			puts("|          |");
+			puts("|         ");
+			puts("|          ");
+			puts("|________");
+		break;
+		case 3:
+			puts(" __________");
+			puts("|          |");
+			puts("|          O");
+			puts("|          |");
+			puts("|         /|");
+			puts("|          |");
+			puts("|          |");
+			puts("|          ");
+			puts("|          ");
+			puts("|________");
+		break;
+		case 4:
+			puts(" __________");
+			puts("|          |");
+			puts("|          O");
+			puts("|          |");
+			puts("|         /|\\");
+			puts("|          |");
+			puts("|          |");
+			puts("|          ");
+			puts("|          ");
+			puts("|________");
+		break;
+		case 5:
+			puts(" __________");
+			puts("|          |");
+			puts("|          O");
+			puts("|          |");
+			puts("|         /|\\");
+			puts("|          |");
+			puts("|          |");
+			puts("|         /");
+			puts("|          ");
+			puts("|________");
+		break;
+		case 6:
+			puts(" __________");
+			puts("|          |");
+			puts("|          O");
+			puts("|          |");
+			puts("|         /|\\");
+			puts("|          |");
+			puts("|          |");
+			puts("|         / \\");
+			puts("|          ");
+			puts("|________");
+		break;
+	}
+}
+
+
+int main()
+{
+	char frase[12][30] = {"dolartoday","inflacion","hiperinflacion","devaluacion","investigar",
+	                      "deflacion","inmigracion","corrupcion","gato","expropiado","camara","hipervinculo"};
+	char letra;
+	int i = 0, salir=0,p,l;
+
+	srand(time(NULL)); // generador de semillas
+	p = rand() % 12;
+	l = strlen(frase[p]);
+	char aux[l];
+
+	for (int i = 0; i < l; ++i)
+	{
+		aux[i] = '_';
+	}
+
+	do
+	{
+		int valor = 0;
+		system("cls"); // limpiar la pantalla	
+		arbol(i);
+
+		cout<<endl<<endl;
+
+		for (int j = 0; j < l; ++j)
+		{
+			cout<<aux[j]<<" ";
+		}
+
+		if(i < l)
+		{
+			cout<<endl<<endl;
+			cout<<"Letra :";
+			cin>>letra;
+
+			// buscar	
+			for (int k = 0; k < l; ++k)
+			{
+				if(frase[p][k] == letra)
+				{
+					aux[k] = letra;
+					valor = 1;
+				}
+			}
+
+			if(valor == 0) i++;
+		}
+
+		if(i == 6)
+		{
+			system("cls");
+			arbol(6);
+			cout<<endl<<frase[p]<<endl;
+			
+
+			
+			puts("Perdio el juego....");
+			getch();
+			exit(0);
+			salir = 1;
+		}
+
+		if(strcmp(frase[p],aux) < 0)
+		{
+			system("cls");
+			arbol(i);
+			cout<<endl<<frase[p]<<endl;
+			puts("Felicitaciones gano....");
+			getch();
+			salir = 1;
+		}
+	}while(salir != 1);
+
+	return 0;
+}
